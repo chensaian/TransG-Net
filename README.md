@@ -13,10 +13,17 @@
 
 # Dependencies
 cuda >= 9.0
+
 cudnn >= 7.0
+
 RDKit == 2020.03.4
+
 torch >= 1.4.0 (please upgrade your torch version in order to reduce the training time)
+
 numpy == 1.19.1
+
 scikit-learn == 0.23.2
+
 tqdm == 4.52.0
+
 Tips: Using code conda install -c conda-forge rdkit can help you install package RDKit quickly.
