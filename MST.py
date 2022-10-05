@@ -146,6 +146,7 @@ class MassSpecTransformer(nn.Module):
         ])
         self.norm = norm_layer(embed_dim)
         self.head = nn.Linear(self.num_features, num_output)
+        self.lin1 = nn.Linear(40,40)
         nn.init.trunc_normal_(self.pos_embed, std=0.02)
         nn.init.trunc_normal_(self.cls_token, std=0.02)
         self.apply(_init_vit_weights)
@@ -155,6 +156,7 @@ class MassSpecTransformer(nn.Module):
         # [B , xrd_length] --> [B , xrd_length/embed_dim , embed_dim]
         x = data.ms_spec
         x = Spectra_Embedding(x, self.spec_length, self.embed_dim)
+        x = self.lin1(x)
         # [1, 1, 100] -> [B, 1, 100] -> [B, xrd_length/embed_dim + 1, 100]
         cls_token = self.cls_token.expand(x.shape[0], -1, -1)
         x = torch.cat((cls_token, x), dim=1)
