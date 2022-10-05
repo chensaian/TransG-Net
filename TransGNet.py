@@ -166,7 +166,7 @@ class TransG_Net(nn.Module):
         # MSTransformer
         x = data.ms_spec
         x = Spectra_Embedding(x, self.spec_length, self.embed_dim)
-        
+        x = self.lin_MLB(x)
         cls_token = self.cls_token.expand(x.shape[0], -1, -1)
         x = torch.cat((cls_token, x), dim=1)
         x = self.pos_drop(x + self.pos_embed)
